@@ -15,7 +15,7 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
-  industry: z.enum(["contact", "report"], { required_error: "Please select an industry" }),
+  industry: z.enum(["contact", "report"]).optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
   webhookUrl: z.string().url("Please enter a valid webhook URL"),
 });
@@ -161,7 +161,7 @@ export function ContactForm() {
 
           <div className="space-y-2">
             <Label htmlFor="industry" className="text-sm font-medium">
-              Industry *
+              Industry
             </Label>
             <Select onValueChange={(value) => setValue("industry", value as "contact" | "report")}>
               <SelectTrigger className="bg-background/50 border-border/50 focus:border-primary transition-smooth">
