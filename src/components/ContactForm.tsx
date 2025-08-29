@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,6 +16,7 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
+  industry: z.enum(["contact", "report"], { required_error: "Please select an industry" }),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -30,18 +32,25 @@ export function ContactForm() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
+
+  const selectedIndustry = watch("industry");
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setIsSuccess(false);
 
     try {
+      const tableName = data.industry === 'contact' ? 'contact_submissions' : 'report_submissions';
+      const { industry, ...submissionData } = data; // Remove industry from the data to insert
+      
       const { error } = await (supabase as any)
-        .from('contact_messages')
-        .insert([data]);
+        .from(tableName)
+        .insert([submissionData]);
 
       if (error) {
         throw error;
@@ -140,6 +149,24 @@ export function ContactForm() {
               {...register("company")}
               className="bg-background/50 border-border/50 focus:border-primary transition-smooth"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="industry" className="text-sm font-medium">
+              Industry *
+            </Label>
+            <Select onValueChange={(value) => setValue("industry", value as "contact" | "report")}>
+              <SelectTrigger className="bg-background/50 border-border/50 focus:border-primary transition-smooth">
+                <SelectValue placeholder="Select industry type" />
+              </SelectTrigger>
+              <SelectContent className="bg-background border-border shadow-elegant z-50">
+                <SelectItem value="contact">Contact</SelectItem>
+                <SelectItem value="report">Report</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.industry && (
+              <p className="text-sm text-destructive">{errors.industry.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
