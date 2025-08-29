@@ -39,8 +39,8 @@ export function ContactForm() {
     setIsSuccess(false);
 
     try {
-      const { error } = await supabase
-        .from('contact_messages' as any)
+      const { error } = await (supabase as any)
+        .from('contact_messages')
         .insert([data]);
 
       if (error) {
