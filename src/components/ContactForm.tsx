@@ -10,7 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, CheckCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -18,6 +17,7 @@ const formSchema = z.object({
   company: z.string().optional(),
   industry: z.enum(["contact", "report"], { required_error: "Please select an industry" }),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  webhookUrl: z.string().url("Please enter a valid webhook URL"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -45,15 +45,23 @@ export function ContactForm() {
     setIsSuccess(false);
 
     try {
-      const tableName = data.industry === 'contact' ? 'contact_submissions' : 'report_submissions';
-      const { industry, ...submissionData } = data; // Remove industry from the data to insert
-      
-      const { error } = await (supabase as any)
-        .from(tableName)
-        .insert([submissionData]);
+      const response = await fetch(data.webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          industry: data.industry,
+          message: data.message,
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       setIsSuccess(true);
@@ -166,6 +174,22 @@ export function ContactForm() {
             </Select>
             {errors.industry && (
               <p className="text-sm text-destructive">{errors.industry.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="webhookUrl" className="text-sm font-medium">
+              Webhook URL *
+            </Label>
+            <Input
+              id="webhookUrl"
+              type="url"
+              placeholder="https://your-webhook-endpoint.com/webhook"
+              {...register("webhookUrl")}
+              className="bg-background/50 border-border/50 focus:border-primary transition-smooth"
+            />
+            {errors.webhookUrl && (
+              <p className="text-sm text-destructive">{errors.webhookUrl.message}</p>
             )}
           </div>
 
