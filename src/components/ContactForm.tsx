@@ -9,13 +9,13 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, CheckCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
-  webhookUrl: z.string().url("Please enter a valid webhook URL"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -39,18 +39,12 @@ export function ContactForm() {
     setIsSuccess(false);
 
     try {
-      const { webhookUrl, ...formData } = data;
-      
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const { error } = await supabase
+        .from('contact_messages' as any)
+        .insert([data]);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (error) {
+        throw error;
       }
 
       setIsSuccess(true);
@@ -63,7 +57,7 @@ export function ContactForm() {
       console.error("Error submitting form:", error);
       toast({
         title: "Error sending message",
-        description: "Please try again later or check your webhook URL.",
+        description: "Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -146,21 +140,6 @@ export function ContactForm() {
               {...register("company")}
               className="bg-background/50 border-border/50 focus:border-primary transition-smooth"
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="webhookUrl" className="text-sm font-medium">
-              Webhook URL *
-            </Label>
-            <Input
-              id="webhookUrl"
-              placeholder="https://your-webhook-url.com/endpoint"
-              {...register("webhookUrl")}
-              className="bg-background/50 border-border/50 focus:border-primary transition-smooth"
-            />
-            {errors.webhookUrl && (
-              <p className="text-sm text-destructive">{errors.webhookUrl.message}</p>
-            )}
           </div>
 
           <div className="space-y-2">
