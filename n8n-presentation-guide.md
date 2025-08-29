@@ -1,9 +1,9 @@
-# n8n: The Complete Developer's Guide
-*A Comprehensive Overview for Developers*
+# n8n:
 
 ---
 
 ## Table of Contents
+
 1. [What is n8n?](#what-is-n8n)
 2. [History & Background](#history--background)
 3. [Why Use n8n?](#why-use-n8n)
@@ -22,38 +22,26 @@
 **n8n** (pronounced "n-eight-n") is an **open-source workflow automation platform** that enables developers and businesses to connect different applications, services, and APIs through visual workflows.
 
 ### Key Characteristics:
+
 - **Fair-code licensed** (not fully open-source for commercial use)
 - **Self-hostable** workflow automation tool
 - **Visual workflow builder** with node-based interface
 - **API-first approach** with extensive integrations
 - **Developer-friendly** with custom code execution capabilities
 
-### Technical Overview:
-- Built with **Node.js** and **TypeScript**
-- **Vue.js** frontend for the workflow editor
-- **SQLite/PostgreSQL/MySQL** database support
-- **Docker** containerization support
-- **REST API** for programmatic access
-
 ---
 
 ## History & Background
 
 ### Founding (2019)
+
 - **Founder**: Jan Oberhauser (former Disney VFX artist who worked on Maleficent and Happy Feet Two)
 - **Initial Release**: June 2019
 - **First Product Hunt Launch**: 2019
 - **Initial Commit**: Available on GitHub since day one
 
-### Key Milestones:
-- **2019**: Initial launch and open-source release
-- **2020-2021**: Rapid community growth and feature expansion
-- **2022**: Cloud offering launched
-- **2023**: AI integration capabilities added
-- **2024**: Major enterprise features and scaling improvements
-- **2025**: Reached 5 years milestone with significant market traction
-
 ### Recent Developments (2025):
+
 - Valuation jumped from $350M to $2.3B in four months
 - Major focus on AI agent building capabilities
 - Enterprise adoption acceleration
@@ -63,6 +51,7 @@
 ## Why Use n8n?
 
 ### For Developers:
+
 1. **No Vendor Lock-in**: Self-hostable and extendable
 2. **Custom Code Execution**: Write JavaScript/Python directly in workflows
 3. **API Integration**: Connect any service with REST/GraphQL APIs
@@ -71,6 +60,7 @@
 6. **Extensibility**: Create custom nodes and integrations
 
 ### For Businesses:
+
 1. **Cost-effective**: Open-source alternative to expensive automation tools
 2. **Data Privacy**: Self-hosted means full data control
 3. **Scalability**: Handle simple to complex automation scenarios
@@ -81,6 +71,7 @@
 ## Core Features & Architecture
 
 ### Visual Workflow Builder
+
 - **Drag-and-drop interface** for creating workflows
 - **Node-based system** where each node represents an action
 - **Conditional logic** and branching capabilities
@@ -88,6 +79,7 @@
 - **Error handling** and retry mechanisms
 
 ### Technical Architecture
+
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   Backend API    │    │   Database      │
@@ -102,6 +94,7 @@
 ```
 
 ### Key Components:
+
 1. **Core Engine**: Handles workflow execution
 2. **Node System**: Modular components for different services
 3. **Credential System**: Secure authentication management
@@ -110,6 +103,7 @@
 6. **Sub-workflows**: Reusable workflow components
 
 ### Node Types:
+
 - **Trigger Nodes**: Start workflows (webhooks, schedules, file watchers)
 - **Regular Nodes**: Perform actions (API calls, data processing)
 - **Core Nodes**: Built-in functionality (HTTP requests, code execution)
@@ -120,30 +114,35 @@
 ## Advantages (Pros)
 
 ### 🎯 **Developer-Friendly**
+
 - **Custom Code Execution**: JavaScript and Python code nodes
-- **API Integration**: Easy REST/GraphQL API connections  
+- **API Integration**: Easy REST/GraphQL API connections
 - **Git Integration**: Version control for workflows
 - **Local Development**: Self-hosting capabilities
 - **Extensible**: Create custom nodes and integrations
 
 ### 💰 **Cost-Effective**
+
 - **Free Self-Hosting**: No licensing costs for self-hosted version
 - **Affordable Cloud**: Competitive pricing vs. alternatives
 - **No Per-Execution Fees**: Unlike many competitors
 
 ### 🔒 **Privacy & Security**
+
 - **Self-Hosted Option**: Complete data control
 - **On-Premises Deployment**: Meet strict compliance requirements
 - **Credential Encryption**: Secure authentication storage
 - **Audit Trails**: Detailed execution logging
 
 ### 🚀 **Flexibility**
+
 - **400+ Integrations**: Pre-built connectors
 - **Custom Workflows**: Complex logic and branching
 - **Multiple Trigger Types**: Webhooks, schedules, manual
 - **Data Transformation**: Built-in data manipulation tools
 
 ### 🏗️ **Architecture Benefits**
+
 - **Microservices Ready**: Docker containerization
 - **Scalable**: Horizontal scaling capabilities
 - **Database Agnostic**: Multiple database support
@@ -154,26 +153,31 @@
 ## Disadvantages (Cons)
 
 ### ⚡ **Performance Limitations**
+
 - **Single-threaded Execution**: Can be slower for CPU-intensive tasks
 - **Memory Usage**: Can consume significant RAM for complex workflows
 - **Concurrent Executions**: Limited parallel processing in self-hosted
 
 ### 📚 **Learning Curve**
+
 - **Complex Interface**: Can be overwhelming for beginners
 - **Documentation Gaps**: Some advanced features lack comprehensive docs
 - **Workflow Logic**: Requires understanding of automation concepts
 
 ### 🔧 **Technical Challenges**
+
 - **Self-Hosting Complexity**: Requires server management skills
 - **Debugging Difficulty**: Complex workflows can be hard to troubleshoot
 - **Version Management**: Workflow versioning can be challenging
 
 ### 💼 **Enterprise Limitations**
+
 - **Limited Enterprise Features**: Some advanced features only in cloud version
 - **Support**: Community support for self-hosted (paid support available)
 - **Compliance**: May require additional configuration for enterprise compliance
 
 ### 🔄 **Operational Concerns**
+
 - **Maintenance Overhead**: Self-hosted requires updates and monitoring
 - **Backup Complexity**: Need to manage workflow and data backups
 - **Scaling Challenges**: Horizontal scaling requires additional setup
@@ -183,6 +187,7 @@
 ## Use Cases for Developers
 
 ### 1. **API Integration & Orchestration**
+
 ```javascript
 // Example: Sync data between CRM and database
 Trigger: New Salesforce Contact
@@ -192,30 +197,35 @@ Trigger: New Salesforce Contact
 ```
 
 ### 2. **CI/CD Pipeline Automation**
+
 - Git webhook triggers
-- Automated testing workflows  
+- Automated testing workflows
 - Deployment notifications
 - Environment management
 
 ### 3. **Data Processing & ETL**
+
 - Database synchronization
 - File processing workflows
 - Data validation and transformation
 - Batch processing jobs
 
 ### 4. **Monitoring & Alerting**
+
 - System health checks
 - Error notification systems
 - Performance monitoring
 - Log aggregation
 
 ### 5. **Customer Journey Automation**
+
 - User onboarding sequences
 - Email marketing campaigns
 - Support ticket routing
 - Feature usage tracking
 
 ### 6. **AI & Machine Learning Workflows**
+
 - AI model integration
 - Data preprocessing pipelines
 - Result processing and distribution
@@ -225,17 +235,18 @@ Trigger: New Salesforce Contact
 
 ## Comparison with Alternatives
 
-| Feature | n8n | Zapier | Microsoft Power Automate | Apache Airflow |
-|---------|-----|--------|-------------------------|----------------|
-| **Pricing** | Free (self-hosted) | $19.99/month | $15/month | Free (open-source) |
-| **Self-Hosting** | ✅ Yes | ❌ No | ❌ No | ✅ Yes |
-| **Custom Code** | ✅ JavaScript/Python | ❌ Limited | ✅ Limited | ✅ Python |
-| **Integrations** | 400+ | 6000+ | 1000+ | Custom only |
-| **Learning Curve** | Medium | Easy | Medium | Hard |
-| **Enterprise Features** | Limited | Advanced | Advanced | Basic |
-| **Developer Focus** | High | Low | Medium | Very High |
+| Feature                 | n8n                  | Zapier       | Microsoft Power Automate | Apache Airflow     |
+| ----------------------- | -------------------- | ------------ | ------------------------ | ------------------ |
+| **Pricing**             | Free (self-hosted)   | $19.99/month | $15/month                | Free (open-source) |
+| **Self-Hosting**        | ✅ Yes               | ❌ No        | ❌ No                    | ✅ Yes             |
+| **Custom Code**         | ✅ JavaScript/Python | ❌ Limited   | ✅ Limited               | ✅ Python          |
+| **Integrations**        | 400+                 | 6000+        | 1000+                    | Custom only        |
+| **Learning Curve**      | Medium               | Easy         | Medium                   | Hard               |
+| **Enterprise Features** | Limited              | Advanced     | Advanced                 | Basic              |
+| **Developer Focus**     | High                 | Low          | Medium                   | Very High          |
 
 ### When to Choose n8n:
+
 - ✅ Need self-hosting capabilities
 - ✅ Want custom code execution
 - ✅ Require cost-effective solution
@@ -243,93 +254,11 @@ Trigger: New Salesforce Contact
 - ✅ Have technical team for setup
 
 ### When to Consider Alternatives:
+
 - ❌ Need extensive pre-built integrations (Zapier)
 - ❌ Require enterprise-grade features out-of-box
 - ❌ Want fully managed solution with no maintenance
 - ❌ Need complex data engineering workflows (Airflow)
-
----
-
-## Getting Started
-
-### Installation Options
-
-#### 1. **Self-Hosted (Docker)**
-```bash
-# Quick start with Docker
-docker run -it --rm \
-  --name n8n \
-  -p 5678:5678 \
-  n8nio/n8n
-
-# With persistent data
-docker run -it --rm \
-  --name n8n \
-  -p 5678:5678 \
-  -v ~/.n8n:/home/node/.n8n \
-  n8nio/n8n
-```
-
-#### 2. **npm Installation**
-```bash
-# Install globally
-npm install n8n -g
-
-# Start n8n
-n8n start
-
-# Access at http://localhost:5678
-```
-
-#### 3. **Cloud Version**
-- Visit [n8n.cloud](https://n8n.cloud)
-- Sign up for free trial
-- Start building workflows immediately
-
-### First Workflow Example
-```javascript
-// Simple HTTP API to Slack notification
-1. Webhook Trigger → Receives HTTP POST
-2. Code Node → Process incoming data
-3. Slack Node → Send formatted message
-```
-
-### Development Best Practices
-1. **Start Simple**: Begin with basic workflows
-2. **Use Version Control**: Export workflows as JSON
-3. **Error Handling**: Always add error branches
-4. **Testing**: Use manual triggers for development
-5. **Documentation**: Add notes to complex nodes
-6. **Monitoring**: Set up execution logging
-
----
-
-## Conclusion
-
-### Why n8n is Valuable for Developers:
-
-**✅ Strengths:**
-- **Open-source flexibility** with self-hosting options
-- **Developer-friendly** with custom code execution
-- **Cost-effective** alternative to proprietary tools
-- **Growing ecosystem** with active community
-- **Modern architecture** built with current technologies
-
-**⚠️ Considerations:**
-- **Operational overhead** for self-hosted deployments
-- **Learning curve** for complex workflow design
-- **Performance limitations** for high-volume processing
-- **Enterprise features** may require cloud version
-
-### Final Recommendation:
-n8n is an **excellent choice** for development teams who:
-- Value **open-source** solutions and flexibility
-- Need **custom integrations** and code execution
-- Want to **minimize licensing costs**
-- Have the **technical expertise** for self-hosting
-- Prefer **developer-centric** automation tools
-
-It's particularly powerful for **startups**, **scale-ups**, and **technical teams** who need sophisticated automation without enterprise-level pricing.
 
 ---
 
@@ -342,5 +271,3 @@ It's particularly powerful for **startups**, **scale-ups**, and **technical team
 - **Cloud Platform**: [n8n.cloud](https://n8n.cloud)
 
 ---
-
-*This guide provides a comprehensive overview of n8n from a developer's perspective. Use it as a foundation for your presentation and feel free to adapt the content based on your audience's specific interests and technical background.*
